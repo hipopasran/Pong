@@ -18,7 +18,7 @@ namespace Pong
 
         public int Health => _health;
 
-        public void Reset()
+        public void ResetValue()
         {
             _currentHealth = _health;
 

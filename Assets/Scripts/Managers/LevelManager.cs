@@ -26,7 +26,7 @@ namespace Pong
         {
             if (_currentLevel)
             {
-                _currentLevel.Reset();
+                _currentLevel.ResetValue();
             }
             else
             {

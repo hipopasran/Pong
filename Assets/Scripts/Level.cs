@@ -8,12 +8,12 @@ namespace Pong
     {
         private List<BrickInteraction> _bricks = new List<BrickInteraction>();
 
-        public void Reset()
+        public void ResetValue()
         {
             foreach(var item in _bricks)
             {
                 item.gameObject.SetActive(true);
-                item.Reset();
+                item.ResetValue();
             }
         }
 

@@ -18,7 +18,7 @@ namespace Pong
             if(_step < _colors.Count) _spriteRenderer.color = _colors[_step];
         }
 
-        public void Reset()
+        public void ResetValue()
         {
             _step = 0;
             _spriteRenderer.color = _colors[_step];
@@ -26,7 +26,7 @@ namespace Pong
 
         private void OnEnable()
         {
-            Reset();
+            ResetValue();
         }
 
         private void Awake()
