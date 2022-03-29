@@ -36,6 +36,8 @@ namespace Pong
 
         private void Movement()
         {
+            if (!Input.GetMouseButton(0)) return;
+
             var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var playerPosition = _rb.position;
 
