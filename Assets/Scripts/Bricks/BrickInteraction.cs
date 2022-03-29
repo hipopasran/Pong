@@ -14,8 +14,16 @@ namespace Pong
         [SerializeField] protected int _health;
         [SerializeField] protected UnityEvent _onDestroy;
         [SerializeField] protected UnityEvent _onHit;
+        [SerializeField] protected UnityEvent _onReset;
 
         public int Health => _health;
+
+        public void Reset()
+        {
+            _currentHealth = _health;
+
+            _onReset?.Invoke();
+        }
 
         private void OnEnable()
         {
@@ -27,6 +35,8 @@ namespace Pong
         {
             if (collision.collider.tag == "Ball")
             {
+                _onHit?.Invoke();
+
                 _currentHealth -= 1;
                 if (_currentHealth == 0) Death();
             }

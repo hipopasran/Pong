@@ -13,6 +13,7 @@ namespace Pong
             foreach(var item in _bricks)
             {
                 item.gameObject.SetActive(true);
+                item.Reset();
             }
         }
 
