@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 namespace Pong
 {
@@ -12,6 +13,9 @@ namespace Pong
 
         [SerializeField] protected int _health;
         [SerializeField] protected UnityEvent _onDestroy;
+        [SerializeField] protected UnityEvent _onHit;
+
+        public int Health => _health;
 
         private void OnEnable()
         {
