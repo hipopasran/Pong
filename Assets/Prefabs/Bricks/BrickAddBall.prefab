@@ -243,7 +243,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1646904862547409803, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
       propertyPath: m_Name
-      value: Brick (2)
+      value: BrickAddBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499332686298976811, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499332686298976811, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499332686298976811, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3755855772096755079, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
       propertyPath: m_RootOrder
@@ -255,7 +267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3755855772096755079, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3755855772096755079, guid: bbe10281a1cbf214990c116ddae01d8e, type: 3}
       propertyPath: m_LocalPosition.z
