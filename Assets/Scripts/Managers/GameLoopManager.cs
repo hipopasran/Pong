@@ -8,7 +8,6 @@ namespace Pong
         private int _currentLife;
         [SerializeField] private int _startAmoutOfLife;
         
-        // Respawn next Level + Respawn ball + Reset Life
         public void Win()
         {
             PrepareGame(true);
@@ -23,7 +22,7 @@ namespace Pong
             }
             else
             {
-                Locator.Instance.BallHandleManager.ActivateMainBall();
+                Locator.Instance.BallHandleManager.Prepare();
             }
         }
 
@@ -33,8 +32,6 @@ namespace Pong
             PrepareGame(false);
         }
 
-
-        // Respawn level + Respawn ball + Reset life
         private void Lose()
         {
             PrepareGame(false);

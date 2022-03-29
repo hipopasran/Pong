@@ -13,8 +13,8 @@ namespace Pong
         private Ball _mainBall;
         private PlayerBallHandler _playerBallHandler;
 
-        [SerializeField] private List<Ball> _activeBalls = new List<Ball>();
-        [SerializeField] private List<Ball> _disableBalls = new List<Ball>();
+        private List<Ball> _activeBalls = new List<Ball>();
+        private List<Ball> _disableBalls = new List<Ball>();
 
         [SerializeField] private Ball _ballPrefab;
         [SerializeField] private float _ballSpeed;
@@ -22,10 +22,28 @@ namespace Pong
         public void Prepare()
         {
             ClearActiveBalls();
-            ActivateMainBall();
+            ActivateBall(_playerBallHandler.BallStartPoint, true);
         }
 
-        public void ActivateBall(Transform point)
+        public void SpawnBall(Transform point)
+        {
+            ActivateBall(point);
+        }
+
+
+        private void ClearActiveBalls()
+        {
+            foreach(var item in _activeBalls)
+            {
+                item.gameObject.SetActive(false);
+                item.Rb.simulated = false;
+                _disableBalls.Add(item);
+            }
+
+            _activeBalls.Clear();
+        }
+
+        private void ActivateBall(Transform point, bool mainBall = false)
         {
             Ball ball = null;
             if (_disableBalls.Count > 0)
@@ -43,47 +61,19 @@ namespace Pong
             _activeBalls.Add(ball);
             ball.OnDisableBall += DisableBall;
 
-            ball.Rb.simulated = true;
-            var direction = Random.insideUnitCircle.normalized;
-            ball.Rb.velocity = direction * _ballSpeed;
-        }
-
-        private void ClearActiveBalls()
-        {
-            foreach(var item in _activeBalls)
+            if (mainBall)
             {
-                item.gameObject.SetActive(false);
-                item.Rb.simulated = false;
-                _disableBalls.Add(item);
-            }
-
-            _activeBalls.Clear();
-        }
-
-        public void ActivateMainBall()
-        {
-            Debug.Log("KEK");
-
-            Ball ball = null;
-            if (_disableBalls.Count > 0)
-            {
-                ball = _disableBalls[0];
-                _disableBalls.Remove(ball);
-                ball.transform.position = _playerBallHandler.BallStartPoint.position;
-                ball.gameObject.SetActive(true);
+                ball.transform.SetParent(_playerBallHandler.transform);
+                ball.transform.localPosition = _playerBallHandler.BallStartPoint.localPosition;
+                _mainBall = ball;
+                _isTrow = false;
             }
             else
             {
-                ball = Instantiate(_ballPrefab, _playerBallHandler.BallStartPoint.position, Quaternion.identity);
+                ball.Rb.simulated = true;
+                var direction = Random.insideUnitCircle.normalized;
+                ball.Rb.velocity = direction * _ballSpeed;
             }
-
-            ball.transform.SetParent(_playerBallHandler.transform);
-            _activeBalls.Add(ball);
-            _mainBall = ball;
-
-            ball.OnDisableBall += DisableBall;
-
-            _isTrow = false;
         }
 
         private void DisableBall(Ball ball)
@@ -116,10 +106,8 @@ namespace Pong
         private void Update()
         {
             if (_isTrow) return;
-            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+            if ( Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Touch");
-
                 TrowMainBall();
             }
         }
@@ -130,7 +118,6 @@ namespace Pong
             _mainBall.transform.SetParent(null);
             _mainBall.Rb.simulated = true;
             var direction = new Vector2(Random.Range(-0.5f, 0.5f), 0.5f).normalized;
-            Debug.Log(direction);
             _mainBall.Rb.velocity = direction * _ballSpeed;
         }
     }

@@ -10,7 +10,7 @@ namespace Pong
         {
             for(int i = 0; i < _ballCount; i++)
             {
-                Locator.Instance.BallHandleManager.ActivateBall(transform);
+                Locator.Instance.BallHandleManager.SpawnBall(transform);
             }
         }
     }
