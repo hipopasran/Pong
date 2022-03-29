@@ -14,6 +14,7 @@ namespace Pong
         public void Deactivate()
         {
             gameObject.SetActive(false);
+            _rb.simulated = false;
 
             OnDisableBall?.Invoke(this);
         }
